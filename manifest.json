@@ -1,9 +1,9 @@
 {
 
 	"manifest_version": 2, 
-	"name": "TriCodingTech Organizer Extension", 
-	"description": "Organizer Tool",
-	"version": "0.00.2",
+	"name": "Lofi Focus Clock", 
+	"description": "Helps use lofi music and attention span to give you the best way to study.",
+	"version": "0.00.1",
 	"content_scripts": [
 		{
 			"matches": [
@@ -21,9 +21,9 @@
 	}, 
 	"browser_action": {
 
-		"default_icon": "TCT.png", 
+		"default_icon": "", 
 		"default_popup": "sketch/index.html", 
-		"default_title": "Make random circles"
+		"default_title": "Start Studying"
 
 	}
 
