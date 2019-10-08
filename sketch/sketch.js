@@ -10,6 +10,10 @@ let hoursRadius;
 let clockDiameter;
 let song;
 
+function preload(){
+song = loadSound("lofiMusic.mp3");
+
+}
 function setup() {
   createCanvas(200, 400);
 //mg = loadImage('documents/ofi-4k-3840x2160-wallpaper-D3A-800x540-MM-100.jpg');
@@ -32,8 +36,6 @@ function setup() {
 
   cx = width / 2;
   cy = height / 4;
-  
-  song = loadSound('lofiMusic.mp3');
 
 }
 
@@ -80,8 +82,6 @@ background(230);
   }
   endShape();
   }
-  
-  song.play();
 }//end of function draw
 
 
@@ -89,6 +89,7 @@ function notes() {
 const work = input.value(); 
   print("I am going to finish " + work);
   bool = 2; 
+  song.play();
 }
 
 
