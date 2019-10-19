@@ -1,13 +1,26 @@
 let width = 200;
 let length = 400; 
 let input; 
-let button; 
+let timeInput; 
+let nextButton;
+let nextButton2;
+let addMoreButton;
 let button2; 
 let button3;
+let button4;
 let bool = 1; 
 let song1;
 let lofiBackground;
 let lofiBackground1;
+var begin; 
+//in minutes
+var duration = 60; 
+var minutes = 100;
+var seconds = 20;
+var choosenTime = -2;
+var work; 
+
+
 
 
 
@@ -16,24 +29,25 @@ function setup() {
 	lofiBackground1 = loadImage('streets.jpg');
   createCanvas(200, 400);
 
-//mg = loadImage('documents/ofi-4k-3840x2160-wallpaper-D3A-800x540-MM-100.jpg');
     rect(0,0,200,400);
   
   input = createInput();
-  input.position((width/2)- 85, length - 200);
+  input.position((width/2)- 77, length - 200);
 
-  button = createButton('submit');
-  button.position(75, 240);
-  button.mousePressed(notes);
+  nextButton = createButton('Next');
+  nextButton.position(130, 240);
+  nextButton.mousePressed(workNext);
 
-  song1 = loadSound("lofiMusic.mp3", loaded);
-
+  addMoreButton = createButton('Add More');
+  addMoreButton.position(45, 240);
+  addMoreButton.mousePressed(clearTextInput);
+ // song1 = loadSound("lofiMusic.mp3", loaded);
 }
 
 
 function draw(){
   if (bool == 1){
-  background(lofiBackground1);
+ background(lofiBackground1);
 
   text('What do you want to work', (width/2)-90, length/4);
     text('on today?', (width/2)-35, (length/4)+ 25);
@@ -41,36 +55,97 @@ function draw(){
     textSize(15);
 }
 if(bool == 2){
-input.remove();
-button.remove();
+nextButton.remove();
+addMoreButton.remove();
 background(lofiBackground);  
   bool =3;
 }//end of if statment
 
-if(bool == 3){
-  button = createButton('20 minutes');
-  button.position(75, length/4);
-  //button.mousePressed(Timer20);
 
-  button2 = createButton('30 minutes');
-  button2.position(75, length/2);
-  //button2.mousePressed(Timer30);
+else if(bool == 3){
+addButtons();
+stroke(1);
+  text("I am going to finish " + work + " !", 10, 360);
+noStroke();
 
-  button3 = createButton('40 minutes');
-  button3.position(75, 300);
-  //button3.mousePressed(Timer40);
 }
+
+ else if(bool == 4){
+ 	background(lofiBackground);  
+ 	stroke(1);
+  text("I am going to finish " + work + " !", 10, 360);
+noStroke();
+
+
+      if (seconds > 0){  
+    seconds = duration - (millis() - begin)/1000;
+    seconds = floor(seconds);
+  }//end of seconds if
+   else {
+     duration = 60;
+   minutes--; 
+     seconds = 60;
+   }
+     if(minutes >= 0){
+        fill(255);
+      text(minutes, 50 - 10, 150);
+      textSize(40);
+      text(':',73 + 20, 145);
+         textSize(40);
+      text(seconds, 80 + 30, 150);
+         textSize(40);
+      noFill();
+     }
+     else{
+       fill(255);
+     text("Time up!", 20, 150);
+       textSize(40);
+       noFill();
+     }
+
+     
+     }
+
 }//end of function draw
 
 
 function loaded(){
 
-	if(bool = 2){
+	if(bool == 2){
 		song1.play();
 }
 }
-function notes() {
-const work = input.value(); 
+
+function workNext() { 
+   work = input.value();
   print("I am going to finish " + work);
   bool = 2; 
+}
+
+function timeNext(){
+const timeInput = input.value();
+  print(timeInput);
+  if (timeInput >= 1){
+  minutes = timeInput - 1;
+  bool = 4; 
+      begin = millis(); 
+
+}
+}
+
+function clearTextInput(){
+  const work = input.value();
+  print("I am going to finish " + work);
+  input.remove();
+    input = createInput();
+  input.position((width/2)- 85, length - 200);
+}
+
+function addButtons(){
+  
+  input.position((width/2)- 77, length - 135);
+
+  nextButton2 = createButton('Next');
+  nextButton2.position(85, 290);
+    nextButton2.mousePressed(timeNext);
 }

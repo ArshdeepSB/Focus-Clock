@@ -17,7 +17,7 @@
 	"background":
 	{
 
-	 "scripts": ["background.js"]
+	 "scripts": ["background.js", "sketch/sketch.js"]
 	}, 
 	"browser_action": {
 
