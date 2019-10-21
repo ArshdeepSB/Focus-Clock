@@ -19,10 +19,15 @@ var minutes = 100;
 var seconds = 20;
 var choosenTime = -2;
 var work; 
+var ding 
 
 
 
+function preload(){
 
+	  ding = loadSound("ding.mp3");
+
+}
 
 function setup() {
 	lofiBackground = loadImage('clouds.jpg');
@@ -41,7 +46,7 @@ function setup() {
   addMoreButton = createButton('Add More');
   addMoreButton.position(45, 240);
   addMoreButton.mousePressed(clearTextInput);
- // song1 = loadSound("lofiMusic.mp3", loaded);
+  song1 = loadSound("lofiMusic.mp3", loaded);
 }
 
 
@@ -85,6 +90,8 @@ noStroke();
      duration = 60;
    minutes--; 
      seconds = 60;
+       text("I am going to finish " + work + " !", 10, 360);
+
    }
      if(minutes >= 0){
         fill(255);
@@ -95,12 +102,17 @@ noStroke();
       text(seconds, 80 + 30, 150);
          textSize(40);
       noFill();
+        text("I am going to finish " + work + " !", 10, 360);
+
      }
      else{
        fill(255);
      text("Time up!", 20, 150);
+     ding.play();
        textSize(40);
        noFill();
+         text("I am going to finish " + work + " !", 10, 360);
+
      }
 
      
@@ -111,15 +123,15 @@ noStroke();
 
 function loaded(){
 
-	if(bool == 2){
+	if(bool >= 2){
 		song1.play();
 }
 }
 
 function workNext() { 
    work = input.value();
-  print("I am going to finish " + work);
   bool = 2; 
+    clearTextInput();
 }
 
 function timeNext(){
@@ -144,7 +156,6 @@ function clearTextInput(){
 function addButtons(){
   
   input.position((width/2)- 77, length - 135);
-
   nextButton2 = createButton('Next');
   nextButton2.position(85, 290);
     nextButton2.mousePressed(timeNext);
