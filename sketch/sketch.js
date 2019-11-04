@@ -16,7 +16,7 @@ var begin;
 //in minutes
 var duration = 60; 
 var minutes = 100;
-var seconds = 20;
+var seconds = 60;
 var choosenTime = -2;
 var work; 
 var ding 
@@ -30,6 +30,7 @@ function preload(){
 }
 
 function setup() {
+
 	lofiBackground = loadImage('clouds.jpg');
 	lofiBackground1 = loadImage('streets.jpg');
   createCanvas(200, 400);
@@ -81,19 +82,20 @@ noStroke();
   text("I am going to finish " + work + " !", 10, 360);
 noStroke();
 
-
-      if (seconds > 0){  
-    seconds = duration - (millis() - begin)/1000;
-    seconds = floor(seconds);
+frameRate(1);
+       if (seconds > 0){
+        console.log(seconds);
+    //seconds = duration - (millis() - begin)/1000;
+    //seconds = floor(seconds);
+        seconds--;
   }//end of seconds if
    else {
      duration = 60;
    minutes--; 
      seconds = 60;
-       text("I am going to finish " + work + " !", 10, 360);
-
    }
      if(minutes >= 0){
+
         fill(255);
       text(minutes, 50 - 10, 150);
       textSize(40);
@@ -102,20 +104,14 @@ noStroke();
       text(seconds, 80 + 30, 150);
          textSize(40);
       noFill();
-        text("I am going to finish " + work + " !", 10, 360);
-
      }
      else{
        fill(255);
      text("Time up!", 20, 150);
-     ding.play();
        textSize(40);
        noFill();
-         text("I am going to finish " + work + " !", 10, 360);
-
+       ding.play();
      }
-
-     
      }
 
 }//end of function draw
@@ -130,6 +126,7 @@ function loaded(){
 
 function workNext() { 
    work = input.value();
+  print("I am going to finish " + work);
   bool = 2; 
     clearTextInput();
 }
